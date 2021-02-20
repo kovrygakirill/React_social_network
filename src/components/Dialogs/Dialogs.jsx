@@ -2,28 +2,36 @@ import React from 'react';
 import dlog from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 
+const Message = (props) => {
+    return (
+        <div className={dlog.message}>{props.message}</div>
+    );
+}
+
+const DialogItem = (props) => {
+    let path = '/dialogs/' + props.id;
+
+    return (
+        <div className={dlog.dialog + " " + dlog.active}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    );
+}
+
 const Dialogs = (props) => {
     return (
         <div className={dlog.dialogs}>
             <div className={dlog.dialogsItem}>
-                <div className={dlog.dialog + " " + dlog.active}>
-                    <NavLink to='/dialogs/1'>Dimych</NavLink>
-                </div>
-                <div className={dlog.dialog}>
-                    <NavLink to='/dialogs/2'>Kirill</NavLink>
-                </div>
-                <div className={dlog.dialog}>
-                    <NavLink to='/dialogs/3'>Sveta</NavLink>
-                </div>
-                <div className={dlog.dialog}>
-                    <NavLink to='/dialogs/4'>Max</NavLink>
-                </div>
+                <DialogItem name='Dimych' id='1'/>
+                <DialogItem name='Kirill' id='2'/>
+                <DialogItem name='Sveta' id='3'/>
+                <DialogItem name='Max' id='4'/>
             </div>
 
             <div className={dlog.messages}>
-                <div className={dlog.message}>Hi</div>
-                <div className={dlog.message}>How are you?</div>
-                <div className={dlog.message}>What is your name?</div>
+                <Message message='Hi'/>
+                <Message message='How are you?'/>
+                <Message message='What is your name?'/>
             </div>
         </div>
     );
