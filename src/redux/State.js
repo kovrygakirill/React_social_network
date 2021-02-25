@@ -20,4 +20,14 @@ let state = {
     }
 }
 
+export let addPost = (areatext) => {
+    let newPost = {
+        id: 3,
+        message: areatext,
+        likeCount: 0,
+    };
+
+    state.profilePage.postsData.push(newPost)
+};
+
 export default state;
