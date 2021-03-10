@@ -2,6 +2,7 @@ import React from 'react';
 import dlog from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {sendNewMessageCreator, updateNewMessageCreator} from "../../redux/State";
 
 
 const Dialogs = (props) => {
@@ -11,6 +12,15 @@ const Dialogs = (props) => {
     let messagesElements = props.state.messagesData.map(message =>
         <Message message={message.message} id={message.id}/>
     );
+    let newMessageBody = props.state.newMessageBody;
+
+    let onSendMessageClick = () => {
+        props.dispatch(sendNewMessageCreator())
+    };
+    let onChangeMessage = (e) => {
+        let message = e.target.value;
+        props.dispatch(updateNewMessageCreator(message));
+    };
 
     return (
         <div className={dlog.dialogs}>
@@ -19,6 +29,10 @@ const Dialogs = (props) => {
             </div>
 
             <div className={dlog.messages}>
+                <textarea onChange={onChangeMessage} value={newMessageBody}/>
+                <div className={dlog.buttonMessage}>
+                    <button onClick={onSendMessageClick}>Send message</button>
+                </div>
                 {messagesElements}
             </div>
         </div>
